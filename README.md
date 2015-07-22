@@ -6,22 +6,22 @@ The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version o
 * [Bug Fixes/history](https://github.com/FranckLab/FIDIC/wiki/Bug-Fixes!)
 * [Franck Lab](http://franck.engin.brown.edu)
  
-# Purpose
+## Purpose
 The following implementation contains the Matlab m-files for our FIDIC algorithm along with example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images. 
 
-# Running FIDIC
+## Running FIDIC
 
-## Input Image Requirements
+### Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
 * We recommend that the input image stack at each dimension should have at least 3 times of the subset size as the number of pixels. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
 * The size of the input image stack should be divisible by 0.5 times the size of the subset. 
 
-## Running including example case
+### Running including example case
 1. Make sure that the main files and the supplemental m files (from file exchange) are in the working directory on Matlab. 
 2. Run the exampleRunFile.m file to and compare its displacement outputs to the contour plots in the referenced paper 
 
 
-# Files
+## Files
 * Main files
  - addDisplacements_2D.m
  - checkConvergenceSSD_2D.m
@@ -41,7 +41,17 @@ The following implementation contains the Matlab m-files for our FIDIC algorithm
  - tiff2mat.m
  - Example test images
 
-# Cite
+## FAQ
+**What are the requirements for the input images?**
+
+Please refer to [input image requirement](https://github.com/FranckLab/FIDIC#input-image-requirements).
+
+**Can I use FIDIC for finding displacement fields in 3D images?**
+
+No. But you can use [FIDVC](https://github.com/FranckLab/FIDVC), this finds 3D displacements in 3D image stack.
+
+
+## Cite
 If used please cite:
 [Bar-Kochba E., Toyjanova J., Andrews E., Kim K., Franck C. (2014) A fast iterative digital volume correlation algorithm for large deformations. Experimental Mechanics. doi: 10.1007/s11340-014-9874-2](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst)
 
@@ -56,5 +66,5 @@ If used please cite:
 }
 ```
 
-# Contact and support
-For questions, please first refer to [FAQ](https://github.com/FranckLab/FIDIC#FAQ) and [Questions/Issues](https://github.com/FranckLab/FIDIC/issues). Add a new question if similar issue hasn't been reported. We shall help you at the earliest. The author's contact information can be found at [Franck Lab](http://franck.engin.brown.edu).
+## Contact and support
+For questions, please first refer to [FAQ](https://github.com/FranckLab/FIDIC#faq) and [Questions/Issues](https://github.com/FranckLab/FIDIC/issues). Add a new question if similar issue hasn't been reported. We shall help you at the earliest. The author's contact information can be found at [Franck Lab](http://franck.engin.brown.edu).
