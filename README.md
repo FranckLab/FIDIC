@@ -7,11 +7,11 @@ The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version o
 * [Franck Lab](http://franck.engin.brown.edu)
  
 # Purpose
-The following implementation contains the Matlab m-files for our FIDIC algorithm along with example images. The FIDVC algorithm determines the 2D displacement fields between consecutive images. 
+The following implementation contains the Matlab m-files for our FIDIC algorithm along with example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images. 
 
 # Running FIDIC
 
-## Input 3D Image Stack Requirements
+## Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
 * We recommend that the input image stack at each dimension should have at least 3 times of the subset size as the number of pixels. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
 * The size of the input image stack should be divisible by 0.5 times the size of the subset. 
