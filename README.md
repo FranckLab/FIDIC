@@ -1,4 +1,4 @@
-The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm ((please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details)) to find dispalcements fields in a 2D image. 
+The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find displacements fields between two 2D images. 
 
 * [Download latest version v1.0!](https://github.com/FranckLab/FIDIC/releases)
 * [FAQ](https://github.com/FranckLab/FIDIC/blob/master/README.md#faq)
@@ -7,25 +7,26 @@ The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version o
 * [Franck Lab](http://franck.engin.brown.edu)
  
 ## Purpose
-The following implementation contains the Matlab m-files for our FIDIC algorithm along with example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images. 
+The following implementation contains the MATLAB m-files for our FIDIC algorithm along with example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images or from a static reference image to a current image. 
 
 ## Running FIDIC
 
-### Sofware Requirement
-Matlab 2011b and the associated Image Processing Toolbox are the minimum requirement to run this code.  
+### Software Requirement
+MATLAB 2011b (for griddedInterpolant) and the associated Image Processing Toolbox (for other miscellaneous function calls) are the minimum requirement to run this code.  
 
 ### Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
-* We recommend that the input image stack at each dimension should have at least 3 times of the subset size as the number of pixels. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
-* The size of the input image stack should be divisible by 0.5 times the size of the subset. 
+* We recommend that the input image stack  should have at least 3 times the subset size as the number of pixels in each dimension. The default subset size is 64x64, meaning the the minimum input image size should be 192x192.
+* Non-square images are acceptable
+* Out-of-the-box FIDIC supports TIF images with tif2mat.m, other file formats require simple modification
 
 ### Running including example case
-1. Make sure that the main files and the supplemental m files (from file exchange) are in the working directory on Matlab. 
-2. Run the `exampleRunFile.m` file to get 2D displacement fields between the image. Note that the displacement output is in the form of a generic uniaxial tension test. 
+1. Make sure that the main files and the supplemental m files (from file exchange) are in the current (working) directory for MATLAB. 
+2. Run the `exampleRunFile.m` file to get 2D displacement fields between the two images. Note that the displacement output is in the form of a generic uniaxial tension test.
 
 
 ## Files
-* Main files
+* Function files
  - addDisplacements_2D.m
  - checkConvergenceSSD_2D.m
  - DIC.m
@@ -35,7 +36,7 @@ Matlab 2011b and the associated Image Processing Toolbox are the minimum require
  - removeOutliers_2D.m
  - areaMapping_2D.m
 
-* Supplement m files from the MATLAB file exchange:
+* Supplement .m files from the MATLAB file exchange:
  - inpaint_nans.m
  - mirt2D_mexinterp.m  (Optional, not currently in use)
 
@@ -45,6 +46,7 @@ Matlab 2011b and the associated Image Processing Toolbox are the minimum require
  - Example test images
 
 ## FAQ
+
 **What are the requirements for the input images?**
 
 Please refer to [input image requirement](https://github.com/FranckLab/FIDIC#input-image-requirements).
@@ -53,6 +55,9 @@ Please refer to [input image requirement](https://github.com/FranckLab/FIDIC#inp
 
 No. But you can use [FIDVC](https://github.com/FranckLab/FIDVC), this finds 3D displacements in 3D image stack.
 
+**Why does the example fail to run?**
+
+In must cases where the example images fail to run, the minium specifications for MATLAB have not been met.
 
 ## Cite
 If used please cite:
