@@ -1,4 +1,4 @@
-The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find displacements fields between two 2D images. 
+The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find displacement fields between two 2D images. 
 
 * [Download latest version v1.0!](https://github.com/FranckLab/FIDIC/releases)
 * [FAQ](https://github.com/FranckLab/FIDIC/blob/master/README.md#faq)
@@ -7,18 +7,18 @@ The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version o
 * [Franck Lab](http://franck.engin.brown.edu)
  
 ## Purpose
-The following implementation contains the MATLAB m-files for our FIDIC algorithm along with example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images or from a static reference image to a current image. 
+The following implementation contains the MATLAB m-files for our FIDIC algorithm along with synthetic example images. The FIDIC algorithm determines the 2D displacement fields between consecutive images or from a static reference image to a current image. 
 
 ## Running FIDIC
 
 ### Software Requirement
-MATLAB 2011b (for griddedInterpolant) and the associated Image Processing Toolbox (for other miscellaneous function calls) are the minimum requirement to run this code.  
+MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Toolbox (for other miscellaneous function calls) are the minimum supported requirements to run this code.  Under some circimstances older versions may function using "interpn", but performance and/or accuracy may suffer.
 
 ### Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
 * We recommend that the input image stack  should have at least 3 times the subset size as the number of pixels in each dimension. The default subset size is 64x64, meaning the the minimum input image size should be 192x192.
 * Non-square images are acceptable
-* Out-of-the-box FIDIC supports TIF images with tif2mat.m, other file formats require simple modification
+* Out-of-the-box FIDIC supports TIF images with img2mat.m, other file formats require simple modification
 
 ### Running including example case
 1. Make sure that the main files and the supplemental m files (from file exchange) are in the current (working) directory for MATLAB. 
@@ -42,7 +42,7 @@ MATLAB 2011b (for griddedInterpolant) and the associated Image Processing Toolbo
 
 * Example Run files
  - exampleRunFile.m
- - tiff2mat.m
+ - img2mat.m
  - Example test images
 
 ## FAQ
