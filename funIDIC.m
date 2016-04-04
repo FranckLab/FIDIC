@@ -108,7 +108,6 @@ if iscell(filename)
     filename = filename{1};
 end
 
-
 [~,filename,~] = fileparts(filename);
 filename = dir([filename,'.mat']);
 fileInfo.filename = {filename.name};
