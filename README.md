@@ -22,7 +22,8 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
 
 ### Running including example case
 1. Make sure that the main files and the supplemental m files (from file exchange) are in the current (working) directory for MATLAB. 
-2. Run the `exampleRunFile.m` file to get 2D displacement fields between the two images. Note that the displacement output is in the form of either a three pixel translation or a generic uniaxial tension test, depending on the test image set selected.
+2. Copy the desired test images from the `stress` or `translation` subdirectories to the `test_images` directory.
+3. Run the `exampleRunFile.m` file to get 2D displacement fields between the two images. Note that the displacement output is in the form of either a three pixel translation or a generic uniaxial tension test, depending on the test image set selected.
 
 
 ## Files
