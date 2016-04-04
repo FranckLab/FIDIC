@@ -97,8 +97,6 @@ disp(['Convergence at iteration ',num2str(i)]);
 disp(['Total time: ',num2str(toc(t0))]);
 end
 
-
-
 %% ========================================================================
 function varargout = parseImages(varargin)
 % pads images and creates meshgrid
@@ -166,7 +164,6 @@ varargout{end+1} = DICPadSize;
 varargout{end+1} = u0;
 end
 
-
 function [u,cc] = parseOutputs(u,cc,filterSpacing,padSize)
 % parses outputs and unpads the displacment field and cc.
 
@@ -184,4 +181,3 @@ cc = cc(1+unpadSize(1,1):end-unpadSize(2,1),...
     1+unpadSize(1,2):end-unpadSize(2,2));
 
 end
-
