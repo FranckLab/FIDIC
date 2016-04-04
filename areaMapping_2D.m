@@ -1,5 +1,4 @@
 function I = areaMapping_2D(varargin)
-%VOLUMEMAPPING images for 3-D images
 % I = areaMapping(I0,m,u0) symmetrically warps undeformed
 % and deformed 2-D images by the displacement field from previous iteration
 % using trilinear interpolation.
