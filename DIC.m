@@ -51,8 +51,12 @@ for k = 1:mSize_
     subst = MTF.*subst; B = MTF.*B;
     
     % run cross-correlation
-    A = xCorr2(subst,B,sSize); %Custom fft-based correllation - very fast
-    
+    A = xCorr2(subst,B,sSize); %Custom fft-based correllation - very fast,
+                               %but not normalized. Be careful using this
+                               %if there is a visable intensity gradient in
+                               %an image
+ 
+%     imagesc(A); pause(0.01)
     % find maximum index of the cross-correlaiton
     [cc(k), maxIdx] = max(A(:));
     
@@ -161,11 +165,12 @@ A = A.*B;
 A = ifftn(A);
 A = real(A);
 A = fftshift(A);
+
 end
 
 %% ========================================================================
 function    duvw = lsqPolyFit2(b, M, trMM)
-% LeastSqPoly performs a 3D polynomial fit in the least squares sense
+% LeastSqPoly performs a polynomial fit in the least squares sense
 % Solves M*x = b,
 % trMM = transpose(M)*M
 % trMb = tranpose(M)*b
@@ -249,7 +254,7 @@ else
     
     nu{1} = ones(sSize(1),sSize(2));
     nu{2} = nu{1};
-    nu{3} = nu{1};   %==== Based onthe usage and the paper this comes from
+    nu{3} = nu{1};   %==== Based on the usage and the paper this comes from
                      %nu should remain 3-dims even for the 2D case
     
 end
@@ -263,7 +268,8 @@ end
 
 %% ========================================================================
 function [cc, ccMask] = removeBadCorrelations(I,cc,ccThreshold)
-% removes bad correlations.  You can insert your own method here.
+% removes bad correlations.  You can insert your own method here. For
+% normalized xcorr a new method is required.
 minOS = 1;
 for i = 1:2
     zeroIdx = I{i} == 0;
@@ -276,8 +282,10 @@ cc = cc/(max(I{1}(:))*max(I{2}(:)));
 ccMask = double(cc >= ccThreshold);
 
 CC = bwconncomp(~ccMask);
-[~,idx] = max(cellfun(@numel,CC.PixelIdxList));
-ccMask(CC.PixelIdxList{idx}) = inf;
+if length(CC.PixelIdxList) > 0
+    [~,idx] = max(cellfun(@numel,CC.PixelIdxList));
+    ccMask(CC.PixelIdxList{idx}) = inf;
+end
 ccMask(cc == 0) = nan;
 ccMask(~isfinite(ccMask)) = 0;
 cc = cc.*ccMask;
