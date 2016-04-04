@@ -56,7 +56,6 @@ iteration = size(sSize,1);
 dSSE = nan;
 converged01 = 0;
 
-
 if iteration > 1 % skip before first displacement estimation
     sSize1 = sSize0/2; % window size refinement
     
