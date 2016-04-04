@@ -6,7 +6,7 @@
 %                 assumed to be consistent with time steps.
 %   Ext: the file extension of the input images.  All images must be of the
 %        same type.       
-%   numImage: optional parameter to pass to tiff2mat limiting the number of
+%   numImage: optional parameter to pass to img2mat limiting the number of
 %             images processed from the subdirectory identified in imagesFolder
 %   sSize: interrogation window (subset) size for the first iterations.
 %          Must be 32,64,96, or 128 pixels and a two column
@@ -36,14 +36,17 @@
 clear; close all; clc;
 
 sSize = [64 64];
-incORcum = 'c';
-imagesFolder = 'test_images';
-resultsFolder = '.\Results\';
-Ext = 'tif';
-numImages = 4;
+incORcum = 'i';
+imagesFolder = './test_images';
+resultsFolder = './Results/';
+ext = 'tif';
+numImages = 3;
 
-[cellIMG,filename] = tiff2mat(imagesFolder,Ext); 
-% [cellIMG,filename] = tiff2mat(imagesFolder,Ext,numImages); 
+%WARNING - the img2mat function provided may not produce rational results
+%under non-Win7 OSs.
+[cellIMG,filename] = img2mat(imagesFolder,ext); %All images in "imagesFolder"
+% [cellIMG,filename] = img2mat(imagesFolder,ext,numImages); %Images 1 to 
+                                                          %numImages only
 
 % Estimate displacements via IDIC
 [u, cc, dm] = funIDIC(filename, sSize, incORcum);
@@ -60,7 +63,7 @@ delete *IDIC_image*.mat
 %% PLOTTING 
 numInc = max(size(u));
 scrsz = get(0,'ScreenSize');
-sizeI = size(cellIMG{1});
+sizeI = size(u{1});
 plotIdx = cell(1,2);
 for ii = 1:2, plotIdx{ii} = 1:dm:sizeI(ii)+1; end
 
@@ -86,4 +89,3 @@ for jj = 1:numInc
         xlabel('X_1'); ylabel('X_2');
     end
 end 
-
