@@ -18,6 +18,7 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
 * We recommend that the input image stack  should have at least 3 times the subset size as the number of pixels in each dimension. The default subset size is 64x64, meaning the the minimum input image size should be 192x192.
 * Non-square images are acceptable
+* The fundamental image type used for input is .mat
 * Out-of-the-box FIDIC supports TIF images with `img2mat.m`, other file formats require simple modification
 
 ### Running including example case
@@ -58,7 +59,7 @@ No. But you can use [FIDVC](https://github.com/FranckLab/FIDVC), this finds 3D d
 
 **Why does the example fail to run?**
 
-In must cases where the example images fail to run, the minium specifications for MATLAB have not been met.
+In many cases where the example images fail to run, the minium specifications for MATLAB have not been met.
 
 ## Cite
 If used please cite:
