@@ -48,7 +48,7 @@ function [u, cc, dm] = funIDIC(varargin)
 %
 
 %% ---- Opening & Reading the First Image into CPU Memory ----
-[fileInfo, sSize0, incORcum, u_, u_c] = parseInputs(varargin{:});
+[fileInfo, sSize0, incORcum, u_, u_c, norm_xcc] = parseInputs(varargin{:});
 
 I{1} = loadFile(fileInfo,1);
 
@@ -61,11 +61,11 @@ for i = 2:numImages % Reads images starting on the second image
 
     %Start DIC
     disp(['Current file: ' fileInfo.filename{i}])
-    [u_, u_c, cc{i-1}, dm] = IDIC(I,sSize0,u_c);
+    [u_, u_c, cc{i-1}, dm] = IDIC(I,sSize0,u_c,norm_xcc);
     
     % Saving iterations of the DIC
-    u{i-1}{1} = u_{1};  u{i-1}{2} = u_{2};  u{i-1}{3} = u_{3};
-    uc{i-1}{1} = u_c{1};  uc{i-1}{2} = u_c{2};
+    u{i-1}{1} = -u_{1};  u{i-1}{2} = -u_{2};  u{i-1}{3} = -u_{3};
+    uc{i-1}{1} = -u_c{1};  uc{i-1}{2} = -u_c{2};
 
     u_ = num2cell(zeros(1,2));
     if strcmpi(incORcum(1),'i') == 1
@@ -150,6 +150,8 @@ switch lower(incORcum)
     otherwise, error('Run method must be incremental or cumulative');
 end
 
+norm_xcc = varargin{4};
+
 % Initial guess of displacement field = [0 0];
 u0 = num2cell(zeros(1,2));
 uc0 = num2cell(zeros(1,2));
@@ -159,5 +161,6 @@ varargout{end + 1} = sSize;
 varargout{end + 1} = incORcum;
 varargout{end+1} = u0;
 varargout{end+1} = uc0;
+varargout{end+1} = norm_xcc;
 
 end

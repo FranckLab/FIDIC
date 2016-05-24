@@ -43,7 +43,7 @@ dm = 8; % desired output mesh spacing
 convergenceCrit = [0.25, 0.5, 0.0625]; % convergence criteria
 ccThreshold = 1e-4; % bad cross-correlation threshold
 
-[I0, sSize, sSpacing, padSize, DICPadSize, u] = parseInputs(varargin{:});
+[I0, sSize, sSpacing, padSize, DICPadSize, u, norm_xcc] = parseInputs(varargin{:});
 
 % START ITERATING
 i = 2; converged01 = 0; SSE = []; I = I0;
@@ -61,7 +61,7 @@ while ~converged01 && i - 1 < maxIterations
         [I, m] = parseImages(I,sSize(i,:),sSpacing(i,:));
         
         % run cross-correlation to get an estimate of the displacements
-        [du, cc] = DIC(I,sSize(i,:),sSpacing(i,:),DICPadSize,ccThreshold);
+        [du, cc] = DIC(I,sSize(i,:),sSpacing(i,:),DICPadSize,ccThreshold,norm_xcc);
   
         % add the displacements from previous iteration to current
         waitbar(3/7,wb,'Adding displacements from previous iteration');
@@ -145,6 +145,8 @@ sSize = [sSize(2), sSize(1)];
 sSpacing = sSize/2; 
 u0 = varargin{3};
 
+norm_xcc = varargin{4};
+
 DICPadSize = sSpacing/2;
 
 sizeI0 = size(I0{1});
@@ -164,6 +166,7 @@ varargout{end+1} = sSpacing;
 varargout{end+1} = [prePad; postPad];
 varargout{end+1} = DICPadSize;
 varargout{end+1} = u0;
+varargout{end+1} = norm_xcc;
 end
 
 
