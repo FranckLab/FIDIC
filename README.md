@@ -38,6 +38,7 @@ The following implementation contains the Matlab m-files for our FIDIC algorithm
 * Example Run files
  - exampleRunFile.m
  - img2mat.m
+ - imageCropping.m
  - FIDIC_plot.m
  - Example test images
 
