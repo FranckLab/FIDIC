@@ -13,12 +13,11 @@ The following implementation contains the Matlab m-files for our FIDIC algorithm
 
 ### Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
-* We recommend that the input image stack at each dimension should have at least 3 times of the subset size as the number of pixels. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
-* The size of the input image stack should be divisible by 0.5 times the size of the subset. 
+* We recommend that the input image size in each dimension be three times the size of the subset size. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
 
 ### Running including example case
-1. Make sure that the main files and the supplemental m files (from file exchange) are in the working directory on Matlab. 
-2. Run the exampleRunFile.m file to and compare its displacement outputs to the contour plots in the referenced paper 
+1. Make sure that the main files and the supplemental m-files (from file exchange) are in the working directory on Matlab. 
+2. Run the exampleRunFile.m file to and compare its displacement outputs to the contour plots expectation for each image type.
 
 
 ## Files
@@ -38,7 +37,8 @@ The following implementation contains the Matlab m-files for our FIDIC algorithm
 
 * Example Run files
  - exampleRunFile.m
- - tiff2mat.m
+ - img2mat.m
+ - FIDIC_plot.m
  - Example test images
 
 ## FAQ
