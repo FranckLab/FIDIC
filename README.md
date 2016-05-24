@@ -1,5 +1,3 @@
-The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find displacement fields between two 2D images. 
-
 The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find dispalcements fields in a 2D image. 
 
 * [Download latest version v1.0!](https://github.com/FranckLab/FIDIC/releases)
@@ -18,7 +16,6 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
 
 ### Input Image Requirements
 * To check if the images have the required speckle pattern and intensity values for correlation please use our [DIC simulator](https://github.com/FranckLab/DIC-Simulator).
-
 * We recommend that the input image stack  should have at least 3 times the subset size as the number of pixels in each dimension. The default subset size is 64x64, meaning the the minimum input image size should be 192x192.
 * Non-square images are acceptable
 * The fundamental image type used for input is .mat
@@ -28,8 +25,7 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
 1. Make sure that the main files and the supplemental m files (from file exchange) are in the current (working) directory for MATLAB. 
 2. Copy the desired test images from the `stress` or `translation` subdirectories to the `test_images` directory.
 3. Run the `exampleRunFile.m` file to get 2D displacement fields between the two images. Note that the displacement output is in the form of either a three pixel translation or a generic uniaxial tension test, depending on the test image set selected.
-
-* We recommend that the input image size in each dimension be three times the size of the subset size. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
+* We recommend that the input image size in each dimension be at least three times the size of the subset size. The default subset size is 64x64, so we recommend that the minimum input image size should be 192x192.
 
 ### Running including example case
 1. Make sure that the main files and the supplemental m-files (from file exchange) are in the working directory on Matlab. 
@@ -53,7 +49,6 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
 * Example files to run basic DIC
  - exampleRunFile.m
  - img2mat.m
-
  - imageCropping.m
  - FIDIC_plot.m
  - Example test images
