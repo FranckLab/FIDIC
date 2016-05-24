@@ -1,0 +1,6 @@
+Test images for stress and translation synthetically generated. The reference image is seeded with randomly placed "speckles" of gausian
+intensity profile.  Progressive deformation is simulated by moving pixels approperiately.  To test with a simple 
+translation, place the images from the "translation" directory here, to test a uniaxial stress deformation place 
+the images in the "stress" directory here.
+
+Shear images have been experimentally generated.
