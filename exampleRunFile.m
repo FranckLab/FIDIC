@@ -19,7 +19,7 @@
 %             incremental (time0 -> time1, time1 -> time2, ...)
 %             (Allowable inputs: 'i','inc','incremental')
 %
-% OUTPUTS
+% DIC OUTPUTS
 % -------------------------------------------------------------------------
 %   u:  displacement field vector calculated from FIDIC. Format: cell array,
 %      which is a 3D vector (components in x,y)  per each time point
@@ -39,17 +39,17 @@ clear; close all; clc;
 
 sSize = [64 64];
 incORcum = 'c'; %use 'i' for incremental mode and 'c' for cumulative
-norm_xcc = 'norm'; %use 'norm' for normalized cross-correlation, considerable time-cost
+norm_xcc = 'off'; %use 'norm' for normalized cross-correlation, considerable time-cost
 ext_in = 'tif'; %Input image formate
-folder_in = './test_images';
+folder_in = './test_images'; %Folder containing the images series on which to run DIC 
 max_def_idx = 'b'; %Specify where the max deformation occurs 
                    %use 'center' or 'c' for the center image,
                    %'end' or 'e' for the last image,
                    %'beginning' or 'b' for the first,
                    %or specific with an integer
 
-%Optionally crop the images before running DIC.  Crop is a binary flag
-crop = 1;
+%Optionally crop the images before running DIC.  Set crop to 'y' or 'yes' to enable cropping.
+crop = 'yes';
 [crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop);
 
 ext_crp = 'tif'; %output image file form, defined in image_cropping.m
