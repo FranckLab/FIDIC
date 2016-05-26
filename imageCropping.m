@@ -1,4 +1,4 @@
-function [crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop)
+function [crop_nw_loc,folder_out,fmt] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop)
 %This function crops the input images to include only the region of
 %interest
 %
