@@ -48,7 +48,9 @@ max_def_idx = 'b'; %Specify where the max deformation occurs
                    %'beginning' or 'b' for the first,
                    %or specific with an integer
 
-[crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx);
+%Optionally crop the images before running DIC.  Crop is a binary flag
+crop = 1;
+[crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop);
 
 ext_crp = 'tif'; %output image file form, defined in image_cropping.m
 resultsFolder = './Results/';
