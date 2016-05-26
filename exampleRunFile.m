@@ -50,13 +50,12 @@ max_def_idx = 'b'; %Specify where the max deformation occurs
 
 %Optionally crop the images before running DIC.  Set crop to 'y' or 'yes' to enable cropping.
 crop = 'yes';
-[crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop);
+[crop_nw_loc,folder_out,ext_crp] = imageCropping(folder_in,ext_in,sSize,max_def_idx,crop);
 
-ext_crp = 'tif'; %output image file form, defined in image_cropping.m
 resultsFolder = './Results/';
 numImages = 3;
 [cellIMG,filename] = img2mat(folder_out,ext_crp); %All images in "imagesFolder"
-% [cellIMG,filename] = img2mat(imagesFolder,ext,numImages); %Images 1 to
+% [cellIMG,filename] = img2mat(folder_out,ext_crp,numImages); %Images 1 to
 %numImages only
 
 %% RUNNING DIC
