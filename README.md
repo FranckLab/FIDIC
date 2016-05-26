@@ -1,6 +1,6 @@
 The Fast Iterative Digital Image Correlation Algorithm (FIDIC) is a 2D version of FIDVC algorithm (please see [Bar-Kochba, Toyjanova et al., Exp. Mechanics, 2014](http://link.springer.com/article/10.1007/s11340-014-9874-2?sa_campaign=email/event/articleAuthor/onlineFirst) for more details) to find dispalcements fields in a 2D image. 
 
-* [Download latest version v1.0!](https://github.com/FranckLab/FIDIC/releases)
+* [Download latest version v1.1!](https://github.com/FranckLab/FIDIC/releases)
 * [FAQ](https://github.com/FranckLab/FIDIC/blob/master/README.md#faq)
 * [Questions/Issues](https://github.com/FranckLab/FIDIC/issues)
 * [Bug Fixes/history](https://github.com/FranckLab/FIDIC/wiki/Bug-Fixes!)
