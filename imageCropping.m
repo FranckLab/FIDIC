@@ -13,7 +13,7 @@ function [crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def
 %                   'end' or 'e' for the last image,
 %                   'beginning' or 'b' for the first,
 %                   or specific with an integer 
-%
+%   crop: string to specify whether to crop images, set to 'y' or 'yes' to crop
 % OUTPUTS
 % -------------------------------------------------------------------------
 %   crop_nw_loc: location of the northwest corner of the cropped region
