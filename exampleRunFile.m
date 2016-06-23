@@ -9,7 +9,7 @@
 %   numImage: optional parameter to pass to img2mat limiting the number of
 %             images processed from the subdirectory identified in imagesFolder
 %   norm_xcc: Specify normalized or or unnormalize cross correlation.  
-%             Unnormalized is considerable faster, but require uniform
+%             Unnormalized is considerable faster, but requires uniform
 %             lighting to generate accurate results.
 %   sSize: interrogation window (subset) size for the first iterations.
 %          Must be 32,64,96, or 128 pixels and a two column
