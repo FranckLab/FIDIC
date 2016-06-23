@@ -8,6 +8,9 @@
 %        same type.
 %   numImage: optional parameter to pass to img2mat limiting the number of
 %             images processed from the subdirectory identified in imagesFolder
+%   norm_xcc: Specify normalized or or unnormalize cross correlation.  
+%             Unnormalized is considerable faster, but require uniform
+%             lighting to generate accurate results.
 %   sSize: interrogation window (subset) size for the first iterations.
 %          Must be 32,64,96, or 128 pixels and a two column
 %          array (one for each dimenision) or scalar (equal for all
@@ -18,6 +21,8 @@
 %             or
 %             incremental (time0 -> time1, time1 -> time2, ...)
 %             (Allowable inputs: 'i','inc','incremental')
+%   max_def_idx: Maximum deformation location in the image series.  
+%               This is used to show the image to be cropped.
 %
 % DIC OUTPUTS
 % -------------------------------------------------------------------------
@@ -40,7 +45,7 @@ clear; close all; clc;
 sSize = [64 64];
 incORcum = 'c'; %use 'i' for incremental mode and 'c' for cumulative
 norm_xcc = 'off'; %use 'norm' for normalized cross-correlation, considerable time-cost
-ext_in = 'tif'; %Input image formate
+ext_in = 'tif'; %Input image format
 folder_in = './test_images'; %Folder containing the images series on which to run DIC 
 max_def_idx = 'b'; %Specify where the max deformation occurs 
                    %use 'center' or 'c' for the center image,
