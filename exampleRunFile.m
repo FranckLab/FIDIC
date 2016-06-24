@@ -37,7 +37,7 @@
 clear; close all; clc;
 %dbstop if error
 
-sSize = [32 32];
+sSize = [64 64];
 incORcum = 'c'; %use 'i' for incremental mode and 'c' for cumulative
 norm_xcc = 'u'; %use 'norm' for normalized cross-correlation, considerable time-cost
 ext_in = 'tif'; %Input image format
