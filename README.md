@@ -51,6 +51,7 @@ MATLAB 2011b (for "griddedInterpolant") and the associated Image Processing Tool
  - img2mat.m
  - imageCropping.m
  - FIDIC_plot.m
+ - image_eval.m
  - Example test images
 
 ## FAQ
