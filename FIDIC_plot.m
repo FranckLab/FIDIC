@@ -44,119 +44,120 @@ for jj = 1:numInc
     figure
     set(gcf,'position',[150,150,scrsz(3)*(7/8),scrsz(4)*3/4])
     for ii = 3:-1:1
-        
-        %Set up axes for the image and for the contour plot
-        a1 = axes;
-        set(a1,'Units','Pixels')
-        
-        a2 = axes;
-        set(a2,'Units','Pixels')
-        
-        subplot(1,3,ii,a1);
-        subplot(1,3,ii,a2);
-        
-        format short
-        
-        %get the displacement data for the current case, filter and mask it
-        u_ = medfilt2(u{jj}{ii});
-        u_([1:dm/2,(end-dm/2+1:end)],:) = nan;
-        u_(:,[1:dm/2,(end-dm/2+1:end)]) = nan; %Crop (some) edge effects
-        
-        
-        u_upscale = upsampleImage(u_,dm);
-        %set up the image of the displacements, padded to the size of the
-        %orginal images
-        disp_img(crop_nw_loc(2):(crop_nw_loc(2)+size(u_upscale,1)-1),...
-            crop_nw_loc(1):(crop_nw_loc(1)+size(u_upscale,2)-1)) = u_upscale;
-        
-        %Set up the alpha-belnding mask so that the contour underneath the
-        %image can be seen
-        alpha_data = ones(img_size);
-        alpha_data((crop_nw_loc(2)+dm*dm/2):(crop_nw_loc(2)+size(u_upscale,1)-dm*dm/2-1),...
-            (crop_nw_loc(1)+dm*dm/2):(crop_nw_loc(1)+size(u_upscale,2)-dm*dm/2)-1) = 0.5;
-        
-        %Find scaling parameters needed for the colorbar
-        disp_mag_ave = nanmean(u_(:));
-        disp_mag_std = nanstd(u_(:));
-        if ii == 3
-            disp_mag_range = max(u_(:)) - min(u_(:));
-            tick_labels = (disp_mag_ave-disp_mag_range):...
-                disp_mag_range/2:(disp_mag_ave+disp_mag_range);
+        try
+            %Set up axes for the image and for the contour plot
+            a1 = axes;
+            set(a1,'Units','Pixels')
+            
+            a2 = axes;
+            set(a2,'Units','Pixels')
+            
+            subplot(1,3,ii,a1);
+            subplot(1,3,ii,a2);
+            
+            format short
+            
+            %get the displacement data for the current case, filter and mask it
+            u_ = medfilt2(u{jj}{ii});
+            u_([1:dm/2,(end-dm/2+1:end)],:) = nan;
+            u_(:,[1:dm/2,(end-dm/2+1:end)]) = nan; %Crop (some) edge effects
+            
+            
+            u_upscale = upsampleImage(u_,dm);
+            %set up the image of the displacements, padded to the size of the
+            %orginal images
+            disp_img(crop_nw_loc(2):(crop_nw_loc(2)+size(u_upscale,1)-1),...
+                crop_nw_loc(1):(crop_nw_loc(1)+size(u_upscale,2)-1)) = u_upscale;
+            
+            %Set up the alpha-belnding mask so that the contour underneath the
+            %image can be seen
+            alpha_data = ones(img_size);
+            alpha_data((crop_nw_loc(2)+dm*dm/2):(crop_nw_loc(2)+size(u_upscale,1)-dm*dm/2-1),...
+                (crop_nw_loc(1)+dm*dm/2):(crop_nw_loc(1)+size(u_upscale,2)-dm*dm/2)-1) = 0.5;
+            
+            %Find scaling parameters needed for the colorbar
+            disp_mag_ave = nanmean(u_(:));
+            disp_mag_std = nanstd(u_(:));
+            if ii == 3
+                disp_mag_range = max(u_(:)) - min(u_(:));
+                tick_labels = (disp_mag_ave-disp_mag_range):...
+                    disp_mag_range/2:(disp_mag_ave+disp_mag_range);
+            end
+            
+            %Do the image plotting
+            set(gcf,'currentaxes',a2)
+            p = imshow(cur_img);
+            set(p,'AlphaData',alpha_data); %use the predefined transparency mask
+            axis image
+            
+            %Do the contour plotting
+            set(gcf,'currentaxes',a1)
+            [~,h] = contourf(disp_img); % flip the contour about x and y
+            % to be in the same reference
+            %  frame as the image
+            set(h,'linestyle','none');
+            colormap('parula')
+            axis image
+            
+            %set appropriate colormasks
+            colormap(a1,'parula')
+            colormap(a2,'gray')
+            
+            %Save the current axis position
+            set(gcf,'CurrentAxes',a1)
+            pos_a1 = get(a1,'position');
+            pos_a2 = get(a2,'position');
+            pos_a1(3) = pos_a1(3) - 50;
+            pos_a2(3) = pos_a2(3) - 50;
+            
+            %set up the plots with contours and colorbar tick scaled by the
+            %magnitude of the range in the Disp. Mag. plot.
+            lvl_step = disp_mag_range/6; %Set number of contour levels by step size
+            if ii == 3
+                title('Displacement magnitude')
+                
+                %Define and set the contour plot levels and colorbar levels
+                lvls_3 = (disp_mag_ave-disp_mag_range):...
+                    lvl_step:(disp_mag_ave+disp_mag_range);
+                h.LevelList = lvls_3;
+                colorbar('Ticks',lvls_3,'Limits',[lvls_3(1),lvls_3(end)])
+                set(a1,'position',pos_a1); % restore position
+                set(a2,'position',pos_a2); % restore position
+                
+            elseif ii == 2
+                title(['Displacement component u_',num2str(ii)])
+                
+                %Set the levels, using the step sizes from the magitude, but
+                %center from the current plot
+                lvls_2 = (disp_mag_ave-disp_mag_range):...
+                    lvl_step:(disp_mag_ave+disp_mag_range);
+                h.LevelList = lvls_2;
+                colorbar('Ticks',lvls_2)
+                set(a1,'position',pos_a1); % restore position
+                set(a2,'position',pos_a2); % restore position
+                
+            elseif ii == 1
+                title(['Displacement component u_',num2str(ii)])
+                lvls_1 = (disp_mag_ave-disp_mag_range):...
+                    lvl_step:(disp_mag_ave+disp_mag_range);
+                h.LevelList = lvls_1;
+                colorbar('Ticks',lvls_1);
+                set(a1,'position',pos_a1); % restore position
+                set(a2,'position',pos_a2); % restore position
+            end
+            
+            %label the axes
+            xlabel('X_1 [px]'); ylabel('X_2 [px]');
+            
+            %         set(gcf,'CurrentAxes',a1)
+            %         p=getframe; %get a frame from the current axes.
+            %         image(p.cdata); % display the data as an image
+            %         axis image;
+            %         impixelinfo; % turn on pixel information
+            %         set(a1,'position',pos_a1); % restore position
+            %         set(a2,'position',pos_a2); % restore position
+        catch
         end
-        
-        %Do the image plotting
-        set(gcf,'currentaxes',a2)
-        p = imshow(cur_img);
-        set(p,'AlphaData',alpha_data); %use the predefined transparency mask
-        axis image
-        
-        %Do the contour plotting
-        set(gcf,'currentaxes',a1)
-        [~,h] = contourf(disp_img); % flip the contour about x and y
-        % to be in the same reference
-        %  frame as the image
-        set(h,'linestyle','none');
-        colormap('parula')
-        axis image
-        
-        %set appropriate colormasks
-        colormap(a1,'parula')
-        colormap(a2,'gray')
-        
-        %Save the current axis position
-        set(gcf,'CurrentAxes',a1)
-        pos_a1 = get(a1,'position');
-        pos_a2 = get(a2,'position');
-        pos_a1(3) = pos_a1(3) - 50;
-        pos_a2(3) = pos_a2(3) - 50;
-        
-        %set up the plots with contours and colorbar tick scaled by the
-        %magnitude of the range in the Disp. Mag. plot.
-        lvl_step = disp_mag_range/6; %Set number of contour levels by step size
-        if ii == 3
-            title('Displacement magnitude')
-            
-            %Define and set the contour plot levels and colorbar levels
-            lvls_3 = (disp_mag_ave-disp_mag_range):...
-                lvl_step:(disp_mag_ave+disp_mag_range);
-            h.LevelList = lvls_3;
-            colorbar('Ticks',lvls_3,'Limits',[lvls_3(1),lvls_3(end)])
-            set(a1,'position',pos_a1); % restore position
-            set(a2,'position',pos_a2); % restore position
-            
-        elseif ii == 2
-            title(['Displacement component u_',num2str(ii)])
-            
-            %Set the levels, using the step sizes from the magitude, but
-            %center from the current plot
-            lvls_2 = (disp_mag_ave-disp_mag_range):...
-                lvl_step:(disp_mag_ave+disp_mag_range);
-            h.LevelList = lvls_2;
-            colorbar('Ticks',lvls_2)
-            set(a1,'position',pos_a1); % restore position
-            set(a2,'position',pos_a2); % restore position
-            
-        elseif ii == 1
-            title(['Displacement component u_',num2str(ii)])
-            lvls_1 = (disp_mag_ave-disp_mag_range):...
-                lvl_step:(disp_mag_ave+disp_mag_range);
-            h.LevelList = lvls_1;
-            colorbar('Ticks',lvls_1);
-            set(a1,'position',pos_a1); % restore position
-            set(a2,'position',pos_a2); % restore position
-        end
-        
-        %label the axes
-        xlabel('X_1 [px]'); ylabel('X_2 [px]');
-        
-%         set(gcf,'CurrentAxes',a1)
-%         p=getframe; %get a frame from the current axes.
-%         image(p.cdata); % display the data as an image
-%         axis image;
-%         impixelinfo; % turn on pixel information
-%         set(a1,'position',pos_a1); % restore position
-%         set(a2,'position',pos_a2); % restore position
-        
     end
 end
 
