@@ -43,15 +43,15 @@ for i = 1:2, idx{i} = m0{i}(1):dm:m0{i}(end); end % construct new meshgrid
 try
 %Try to interpolate the displacement field with griddedInterpolant.
 %This function does not exist on older versions of MATLAB (2011b and
-%earlier), so fail over to interpn, with is slower and prone to other
+%earlier), so fail over to interpn, which is slower and prone to other
 %failures.
     du = cell(1,2);
     for i = 1:2
-        F = griddedInterpolant(m0_{1}, m0_{2}, du0{i}, 'linear');
+        F = griddedInterpolant(m0_{1}, m0_{2}, du0{i}, 'spline');
         du{i} = F(m{1},m{2});
     end
     
-    F = griddedInterpolant(m0_{1}, m0_{2}, cc0, 'linear');
+    F = griddedInterpolant(m0_{1}, m0_{2}, cc0, 'spline');
     cc = F(m{1},m{2});
     
 catch
@@ -59,7 +59,7 @@ catch
     disp('Attempting interpn')
     du = cell(1,2);
     for i = 1:2
-        du{i} = interpn(m0_{1}, m0_{2}, du0{i}, m{1}, m{2}, 'linear');
+        du{i} = interpn(m0_{1}, m0_{2}, du0{i}, m{1}, m{2}, 'spline');
         %du{i} = V(m{1},m{2});
     end
     
