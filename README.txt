@@ -1,4 +1,4 @@
-Date:       May 20th, 2016
+Date:       June 24th, 2016
 Author:     Alexander Landauer
 
 Description:  This package contains files for the Fast Iterative 
@@ -12,8 +12,7 @@ Experimental Mechanics. doi: 10.1007/s11340-014-9874-2
 The main example file to see how the package runs is exampleRunFile.m.
 
 Notes: Please ensure that the only .mat files in the working directory are those pertaining to the current image set.
-Tested on MATLAB 2015a & 2015b for Windows x64, and MATLAB 2013a for Windows x64.  For our purposes we have validated the code
-on the SEM 2014 DIC challenge images; use at your own risk.
+Tested on MATLAB 2015a & 2015b for Windows x64, MATLAB 2013a for Windows x64 (algorithm only), and MATLAB 2015b for CentOS 7.  For our purposes we have validated the code on the SEM 2014 DIC challenge images; use at your own risk.
 
 Core files:
 addDisplacements_2D.m
@@ -29,6 +28,7 @@ Example run files:
 exampleRunFile.m
 imageCropping.m
 FIDIC_plot.m
+image_eval.m
 img2mat.m
 
 
@@ -36,7 +36,9 @@ Files from the MATLAB file exchange:
 inpaint_nans.m
 mirt2D_mexinterp.m %Optional, not currently in use.  
 
-History:    
+History:
+0.14 - New image evaluation function: incorperates basic noise foor and displacement resolution assessment
+       metices in the base workflow. 6/24/16
 0.13 - Release with several improvements: new plotting routine used by default "FIDIC_plot.m" with
        built-in region of interest selction for rectangular areas, 
        added a normalized cross-correlation option (with validation).  05/20/16
