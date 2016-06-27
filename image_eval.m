@@ -105,9 +105,9 @@ else
     
     z = 1.96;
     %Compute the confidence interval on the displacements
-    CI_disp(:,:,1) = u{3} - z*spatial_res(3)/sqrt(l);
+    CI_disp(:,:,1) = u{3} - z*spatial_res(3)/sqrt(2);
     CI_disp_mean(1) = mean2(CI_disp(:,:,1));
-    CI_disp(:,:,2) = u{3} + z*spatial_res(3)/sqrt(l);
+    CI_disp(:,:,2) = u{3} + z*spatial_res(3)/sqrt(2);
     CI_disp_mean(2) = mean2(CI_disp(:,:,2));
     
 end
