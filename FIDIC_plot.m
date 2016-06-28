@@ -72,8 +72,10 @@ for jj = 1:numInc
             %Set up the alpha-belnding mask so that the contour underneath the
             %image can be seen
             alpha_data = ones(img_size);
-            alpha_data((crop_nw_loc(2)+dm*dm/2):(crop_nw_loc(2)+size(u_upscale,1)-dm*dm/2-1),...
-                (crop_nw_loc(1)+dm*dm/2):(crop_nw_loc(1)+size(u_upscale,2)-dm*dm/2)-1) = 0.5;
+            %alpha_data((crop_nw_loc(2)+dm*dm/2):(crop_nw_loc(2)+size(u_upscale,1)-dm*dm/2-1),...
+            %   (crop_nw_loc(1)+dm*dm/2):(crop_nw_loc(1)+size(u_upscale,2)-dm*dm/2)-1) = 0.5;
+            
+            alpha_data(alpha_data>0.5) = 0.65;
             
             %Find scaling parameters needed for the colorbar
             disp_mag_ave = nanmean(u_(:));
