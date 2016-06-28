@@ -95,7 +95,16 @@ numImages = 3;
 if exist(resultsFolder,'dir') ~= 7
     mkdir(resultsFolder)
 end
-save(strcat(resultsFolder,'resultsFIDIC.mat'),'u','cc','cellIMG','dm');
+%Build the reporting table struct array
+prefilt_str = strcat(filt_opt{1},', ',num2str(filt_opt{2}),', ',num2str(filt_opt{3}));
+reporting_table = struct('cameraNoise',noise_percent,'prefiltering',prefilt_str,...
+    'subset',sSize,'step',dm,'xcorrType',norm_xcc,'interpolent','spline',...
+    'numMeasurementPts',numel(u{1}{1}),'totalImages',length(u)+1,...
+    'displacementSpatialRes',mean(sSize),'displacementResX',meas_res(1),...
+    'displacementResY',meas_res(2));
+
+%Save relavent workspace variables
+save(strcat(resultsFolder,'resultsFIDIC.mat'),'u','cc','cellIMG','dm','reporting_table');
 
 
 %% PLOTTING
