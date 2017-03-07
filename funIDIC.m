@@ -64,7 +64,7 @@ for i = 2:numImages % Reads images starting on the second image
     [u_, u_c, cc{i-1}, dm] = IDIC(I,sSize0,u_c,norm_xcc);
     
     % Saving iterations of the DIC
-    u{i-1}{1} = -u_{1};  u{i-1}{2} = -u_{2};  u{i-1}{3} = -u_{3};
+    u{i-1}{1} = -u_{1};  u{i-1}{2} = -u_{2};  u{i-1}{3} = u_{3};
     uc{i-1}{1} = -u_c{1};  uc{i-1}{2} = -u_c{2};
 
     u_ = num2cell(zeros(1,2));
