@@ -41,7 +41,7 @@ sSize = [64 64];
 incORcum = 'c'; %use 'i' for incremental mode and 'c' for cumulative
 norm_xcc = 'u'; %use 'norm' for normalized cross-correlation, considerable time-cost
 ext_in = 'tif'; %Input image format
-folder_in = './test_images';
+folder_in = ['.',filesep,'test_images';
 max_def_idx = 'b'; %Specify where the max deformation occurs
 yn = 'y';
 %use 'center' or 'c' for the center image,
@@ -78,7 +78,7 @@ end
 [crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx);
 
 ext_crp = 'tif'; %output image file form, defined in image_cropping.m
-resultsFolder = './Results/';
+resultsFolder = ['.',filesep,'Results',filesep];
 numImages = 3;
 
 %Convert input images to .mat and smooth
@@ -95,17 +95,21 @@ numImages = 3;
 if exist(resultsFolder,'dir') ~= 7
     mkdir(resultsFolder)
 end
-%Build the reporting table struct array
-prefilt_str = strcat(filt_opt{1},', ',num2str(filt_opt{2}),', ',num2str(filt_opt{3}));
-reporting_table = struct('cameraNoise',noise_percent,'prefiltering',prefilt_str,...
-    'subset',sSize,'step',dm,'xcorrType',norm_xcc,'interpolent','spline',...
-    'numMeasurementPts',numel(u{1}{1}),'totalImages',length(u)+1,...
-    'displacementSpatialRes',mean(sSize),'displacementResX',meas_res(1),...
-    'displacementResY',meas_res(2));
 
-%Save relavent workspace variables
-save(strcat(resultsFolder,'resultsFIDIC.mat'),'u','cc','cellIMG','dm','reporting_table');
-
+if no_im == 0
+    %Build the reporting table struct array
+    prefilt_str = strcat(filt_opt{1},', ',num2str(filt_opt{2}),', ',num2str(filt_opt{3}));
+    reporting_table = struct('cameraNoise',noise_percent,'prefiltering',prefilt_str,...
+        'subset',sSize,'step',dm,'xcorrType',norm_xcc,'interpolent','spline',...
+        'numMeasurementPts',numel(u{1}{1}),'totalImages',length(u)+1,...
+        'displacementSpatialRes',mean(sSize),'displacementResX',meas_res(1),...
+        'displacementResY',meas_res(2));    
+    %Save relavent workspace variables
+    save(strcat(resultsFolder,'resultsFIDIC.mat'),'u','cc','cellIMG','dm','reporting_table');
+else
+    %Save relavent workspace variables
+    save(strcat(resultsFolder,'resultsFIDIC.mat'),'u','cc','dm');
+end
 
 %% PLOTTING
 close all;
@@ -119,6 +123,7 @@ FIDIC_plot(u,dm,def_udef,crop_nw_loc,folder_in,ext_in)
 %save the last figure
 saveas(gcf,strcat(resultsFolder,'FIDIC_plots.fig'))
 
+if no_im == 0
 %% Reporting Table
 fprintf('\n-----------------------------------------\n');
 fprintf('Run Parameters and Measurement Specifications\n')
@@ -136,6 +141,8 @@ fprintf('Displacement\n   Spatial resolution \t %0.2gpx \n   ',mean(sSize));
 fprintf('Measurement res, x    %0.2g\n   ',meas_res(1));
 fprintf('Measurement res, y    %0.2g\n',meas_res(2));
 fprintf('-----------------------------------------\n');
+else
+end
 %% CLEAN UP
 %Clean up the current set of images from the cd
 delete *IDIC_image*.mat
