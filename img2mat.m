@@ -2,7 +2,7 @@ function [cellIMG,filename,filt_opt] = img2mat(Folder,ext,smoothing,s)
     %Read images and write them out in .mat
 
     %Load all of the files directory information
-    files = dir(strcat('./',Folder,'/*',ext));
+    files = dir(strcat('.',filesep,Folder,filesep,'*',ext));
 
     %Determine the number of files
     if nargin<4
@@ -16,7 +16,7 @@ function [cellIMG,filename,filt_opt] = img2mat(Folder,ext,smoothing,s)
         
     % Loop through files, reading in alpha-numeric order
     for ii = 1:s
-        READ = imread(strcat(Folder,'/',files(ii).name));
+        READ = imread(strcat(Folder,filesep,files(ii).name));
         %store the image, and do a small amount of gaussian blurring to
         %improve contrast gradients
         IMG(:,:,ii) = imfilter(double(READ(:,:,1)),filter_gauss,'replicate');
@@ -30,7 +30,7 @@ function [cellIMG,filename,filt_opt] = img2mat(Folder,ext,smoothing,s)
     filt_opt = {'none',[nan,nan],nan};    
     % Loop through files, reading in alpha-numeric order
     for ii = 1:s
-        READ = imread(strcat(Folder,'/',files(ii).name));
+        READ = imread(strcat(Folder,filesep,files(ii).name));
         %store the image, and do a small amount of gaussian blurring to
         %improve contrast gradients
         IMG(:,:,ii) = double(READ(:,:,1));
