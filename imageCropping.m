@@ -24,7 +24,7 @@ function [crop_nw_loc,folder_out,fmt] = imageCropping(folder_in,ext_in,sSize,max
 
 %Output variables
 fmt = 'tif';
-folder_out = strcat(folder_in,'/cropped_images/');
+folder_out = strcat(folder_in,filesep,'cropped_images',filesep);
 ext_out = strcat('.',fmt);
 
 %Make a new output folder if none exists
@@ -47,7 +47,7 @@ for hh = 1:length(alphab)
 end
 
 %% Read in image filenames
-files = dir(strcat(folder_in,'/*',ext_in));
+files = dir(strcat(folder_in,filesep,'*',ext_in));
 l = length(files);
 
 %% Get Cropping Region
@@ -61,7 +61,7 @@ if strcmp(crop, 'yes')||strcmp(crop, 'y')
         im_loc = 1;
     end
     figure
-    imagesc(imread(strcat(folder_in,'/',files(im_loc).name)))
+    imagesc(imread(strcat(folder_in,filesep,files(im_loc).name)))
     title('Click to select cropping region. Define two points: top left and bottom right')
     axis('image'); colormap gray
     [X,Y] = ginput(2);
@@ -80,9 +80,9 @@ if strcmp(crop, 'yes')||strcmp(crop, 'y')
 else
     crop_nw_loc = [1,1];
     X_ss(1) = 1;
-    X_ss(2) = size(imread(strcat(folder_in,'/',files(1).name)),2);
+    X_ss(2) = size(imread(strcat(folder_in,filesep,files(1).name)),2);
     Y_ss(1) = 1;
-    Y_ss(2) = size(imread(strcat(folder_in,'/',files(1).name)),1);
+    Y_ss(2) = size(imread(strcat(folder_in,filesep,files(1).name)),1);
     
 end
 
@@ -91,7 +91,7 @@ end
 image_idx = 1:l;
 % Loop through files
 for ii = 1:length(image_idx)
-    READ = imread(strcat(folder_in,'/',files(image_idx(ii)).name));
+    READ = imread(strcat(folder_in,filesep,files(image_idx(ii)).name));
     try
     READ = rgb2gray(READ);
     catch
