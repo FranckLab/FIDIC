@@ -42,7 +42,7 @@ for jj = 1:numInc
     %     disp_mag_range = max(max(medfilt2(u{jj}{3}))) - min(min(medfilt2(u{jj}{3})));
     
     figure
-%    set(gcf,'position',[150,150,scrsz(3)*(7/8),scrsz(4)*3/4])
+    set(gcf,'position',[150,150,scrsz(3)*(7/8),scrsz(4)*3/4])
     for ii = 3:-1:1
         try
             %Set up axes for the image and for the contour plot
@@ -52,8 +52,10 @@ for jj = 1:numInc
             a2 = axes;
             set(a2,'Units','Pixels')
             
+%             if ii < 3
             subplot(1,3,ii,a1);
             subplot(1,3,ii,a2);
+%             end
             
             format short
             
