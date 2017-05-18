@@ -41,7 +41,7 @@ sSize = [64 64];
 incORcum = 'c'; %use 'i' for incremental mode and 'c' for cumulative
 norm_xcc = 'u'; %use 'norm' for normalized cross-correlation, considerable time-cost
 ext_in = 'tif'; %Input image format
-folder_in = ['.',filesep,'test_images';
+folder_in = ['.',filesep,'test_images'];
 max_def_idx = 'b'; %Specify where the max deformation occurs
 yn = 'y';
 %use 'center' or 'c' for the center image,
@@ -53,7 +53,7 @@ yn = 'y';
 [noise_percent,meas_res,CI_disp_mean,no_im] = image_eval(folder_in,ext_in);
 
 %Write outputs to screen and confirm run
-if no_im == 0;
+if no_im == 0
     clc
     fprintf('IMAGE QUALITY DIAGNOSTICS\n-----------------------------------------\n')
     fprintf('Noise level: %0.2g%% \n',noise_percent)
@@ -75,7 +75,7 @@ else
 end
 
 %Image cropping to get a region of interest on the specimen
-[crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx);
+[crop_nw_loc,folder_out] = imageCropping(folder_in,ext_in,sSize,max_def_idx,'on');
 
 ext_crp = 'tif'; %output image file form, defined in image_cropping.m
 resultsFolder = ['.',filesep,'Results',filesep];
