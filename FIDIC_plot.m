@@ -22,7 +22,7 @@ else
 end
 
 %% Read in image filenames
-files = dir(strcat(imagesFolder,'/*',ext_in));
+files = dir(strcat(imagesFolder,filesep,'*',ext_in));
 l = length(files);
 
 %% plot IDIC results
@@ -30,7 +30,7 @@ l = length(files);
 for jj = 1:numInc
     
     %read in the associated image
-    cur_img = imread(strcat(imagesFolder,'/',files(jj+im_idx_offset).name));
+    cur_img = imread(strcat(imagesFolder,filesep,files(jj+im_idx_offset).name));
     try
         cur_img = rgb2gray(cur_img);
     catch
@@ -42,7 +42,7 @@ for jj = 1:numInc
     %     disp_mag_range = max(max(medfilt2(u{jj}{3}))) - min(min(medfilt2(u{jj}{3})));
     
     figure
-    set(gcf,'position',[150,150,scrsz(3)*(7/8),scrsz(4)*3/4])
+%    set(gcf,'position',[150,150,scrsz(3)*(7/8),scrsz(4)*3/4])
     for ii = 3:-1:1
         try
             %Set up axes for the image and for the contour plot
